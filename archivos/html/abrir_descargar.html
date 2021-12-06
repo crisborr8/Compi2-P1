@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <input type="file" id="file-input" />
+    <h3>Contenido del archivo:</h3>
+    <P id="contenido-archivo"></P>
+
+    
+    <button onclick="download('file text', 'myfilename.txt', 'text/plain')">Crear archivo</button>
+    <br>
+    <a href="" id="a">click here to download your file</a>    
+    <script type="text/javascript">
+      function leerArchivo(e) {
+        var archivo = e.target.files[0];
+        if (!archivo) {
+          return;
+        }
+        var lector = new FileReader();
+        lector.onload = function(e) {
+          var contenido = e.target.result;
+          mostrarContenido(contenido);
+        };
+        lector.readAsText(archivo);
+      }
+
+      function mostrarContenido(contenido) {
+        var elemento = document.getElementById('contenido-archivo');
+        elemento.innerHTML = contenido;
+      }
+
+      function download(text, name, type) {
+        var contenido = document.getElementById("contenido-archivo").innerHTML
+        var a = document.getElementById("a");
+        var file = new Blob([contenido], {type: type});
+        a.href = URL.createObjectURL(file);
+        a.download = name;
+      }      
+
+    document.getElementById('file-input')
+      .addEventListener('change', leerArchivo, false);
+    </script>
+</body>
+</html>
