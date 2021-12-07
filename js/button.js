@@ -1,5 +1,3 @@
-import {compilerMain} from '../content/compiler/main.mjs'
-
 function compilar(id){
     var labels = document.querySelectorAll(".accordion-item__label");
 	[].forEach.call(labels, function(label) {
@@ -7,8 +5,7 @@ function compilar(id){
 		if (el.dataset.actabId == id ){
             el = el.childNodes[1].childNodes[0]
             var texto = el.childNodes[0].childNodes[1].value
-            console.log(texto)
-            alert(compilerMain(texto))
+            el.childNodes[1].childNodes[1].value = compilerMain(texto)
         } 
 	});
 }
@@ -20,7 +17,7 @@ function traducir(id){
 		if (el.dataset.actabId == id ){
             el = el.childNodes[1].childNodes[0]
             var texto = el.childNodes[0].childNodes[1].value
-            console.log(texto)
+            el.childNodes[1].childNodes[1].value = traductorMain(texto)
         } 
 	});
 }
